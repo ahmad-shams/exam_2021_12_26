@@ -3,26 +3,33 @@ global:
   scrape_timeout: 10s
 
 scrape_configs:
-  - job_name: "prometheus"
+  - job_name: prometheus
+    honor_timestamps: true
     scrape_interval: 5s
+    scrape_timeout: 5s
+    metrics_path: /metrics
+    scheme: http
+    follow_redirects: true
     static_configs:
-    - targets: ["localhost:9090"]
-
-  - job_name: "redis"
+    - targets:
+      - localhost:9090
+  - job_name: redis
+    honor_timestamps: true
     scrape_interval: 5s
+    scrape_timeout: 5s
+    metrics_path: /metrics
+    scheme: http
+    follow_redirects: true
     static_configs:
-    - targets: ["redis:6379"]
-
-  - job_name: "exam_app"
+    - targets:
+      - redis:6379
+  - job_name: exam_app
+    honor_timestamps: true
     scrape_interval: 5s
+    scrape_timeout: 5s
+    metrics_path: /prom_metrics
+    scheme: http
+    follow_redirects: true
     static_configs:
-    - targets: ["app:5001"]
-  #     labels:
-  #       group: 'metrics'
-  # - job_name: "app"
-  #   dns_sd_configs:
-  #     - names: ["app"]
-  #       port: 5001
-  #       type: A
-  #       refresh_interval: 5s
-
+    - targets:
+      - app:5001

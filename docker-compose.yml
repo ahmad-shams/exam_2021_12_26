@@ -26,18 +26,6 @@ services:
       - ./config/redis.conf:/redis.conf
       - ./redis-data:/var/lib/redis
     healthcheck:
-      # test:
-      #   [
-      #     "CMD",
-      #     "redis-cli",
-      #     "-h",
-      #     "${REDIS_IP}",
-      #     "-p",
-      #     "6379",
-      #     "-a",
-      #     "${REDIS_PASSWORD}",
-      #     "ping",
-      #   ]
       test: "redis-cli -h ${REDIS_IP} -p 6379 -a ${REDIS_PASSWORD} ping"
       interval: 1s
       timeout: 3s

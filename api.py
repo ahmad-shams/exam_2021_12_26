@@ -17,7 +17,7 @@ app.add_middleware(
     prefix="exam",
     skip_paths=["/healthcheck"],
 )
-app.add_route("/metrics", handle_metrics)
+app.add_route("/prom_metrics", handle_metrics)
 settings = Settings()
 redis_con = None
 
