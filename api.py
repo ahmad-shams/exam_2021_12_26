@@ -17,7 +17,7 @@ app.add_middleware(
     prefix="exam",
     skip_paths=["/healthcheck"],
 )
-app.add_route("/prom-metrics", handle_metrics)
+app.add_route("/metrics", handle_metrics)
 settings = Settings()
 redis_con = None
 
@@ -46,4 +46,8 @@ def set_data(item: Item, response: Response):
     if redis_con.get(item.id):
         response.status_code = status.HTTP_200_OK
     redis_con.set(item.id, item.data)
+    return {"status": "ok"}
+
+@app.get("/healthcheck")
+def healthcheck():
     return {"status": "ok"}

@@ -9,7 +9,7 @@ output=$(curl \
     --write-out '%{http_code}' \
     --silent \
     --output /dev/null \
-    http://localhost:5000/healthcheck)
+    http://localhost:5001/healthcheck)
 if [[ $output != '200' ]]; then
     echo "ERROR: healthcheck request failed with response code $output"
     exit 1
@@ -18,7 +18,7 @@ fi
 output=$(curl \
     --fail \
     --silent \
-    http://localhost:5000/healthcheck)
+    http://localhost:5001/healthcheck)
 if [[ $output != '{"status":"ok"}' ]]; then
     echo "ERROR: healthcheck request got unexpected output: $output"
     exit 1
@@ -29,7 +29,7 @@ output=$(curl \
     --write-out '%{http_code}' \
     --silent \
     --output /dev/null \
-    http://localhost:5000/get/something)
+    http://localhost:5001/get/something)
 if [[ $output != '404' ]]; then
     echo "ERROR: /get/something request did not return 404. Got instead $output"
     exit 1
@@ -43,7 +43,7 @@ output=$(curl \
     --request POST \
     --header "Content-Type: application/json" \
     --data '{"id": "one", "data": "one"}' \
-    http://localhost:5000/set)
+    http://localhost:5001/set)
 if [[ ! $output =~ 2[0-9]+ ]]; then
     echo "ERROR: /set request did not return 2xx. Got instead $output"
     exit 1
@@ -54,7 +54,7 @@ output=$(curl \
     --write-out '%{http_code}' \
     --silent \
     --output /dev/null \
-    http://localhost:5000/get/one)
+    http://localhost:5001/get/one)
 if [[ $output != '200' ]]; then
     echo "ERROR: /get/one request did not return 200. Got instead $output"
     exit 1
@@ -63,7 +63,7 @@ fi
 output=$(curl \
     --fail \
     --silent \
-    http://localhost:5000/get/one)
+    http://localhost:5001/get/one)
 if [[ $output != '{"one":"one"}' ]]; then
     echo "ERROR: /get/one request got unexpected output: $output"
     exit 1
