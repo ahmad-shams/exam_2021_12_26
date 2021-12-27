@@ -1,0 +1,16 @@
+Prometheus:
+http://localhost:9090/metrics
+
+Targets:
+http://localhost:9090/classic/targets
+
+FastApi Metrics:
+http://localhost:5001/prom_metrics
+
+
+Redis Exporter Metrics:
+http://localhost:9121/metrics
+
+redis_instance_info:
+http://localhost:9090/classic/graph?g0.range_input=1h&g0.expr=redis_instance_info&g0.tab=0
+

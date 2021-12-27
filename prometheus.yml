@@ -13,16 +13,10 @@ scrape_configs:
     static_configs:
     - targets:
       - localhost:9090
-  - job_name: redis
-    honor_timestamps: true
-    scrape_interval: 5s
-    scrape_timeout: 5s
-    metrics_path: /metrics
-    scheme: http
-    follow_redirects: true
+  - job_name: redis_exporter
     static_configs:
-    - targets:
-      - redis:6379
+    - targets: 
+      - redis_exporter:9121
   - job_name: exam_app
     honor_timestamps: true
     scrape_interval: 5s
@@ -33,3 +27,5 @@ scrape_configs:
     static_configs:
     - targets:
       - app:5001
+remote_read:
+  - url: "http://adapter:9201/read"
