@@ -1,8 +1,5 @@
 version: "3"
 
-volumes:
-    prometheus_data: {}
-
 services:
   app:
     build: .
@@ -24,7 +21,7 @@ services:
       - 6379:6379
     volumes:
       - ./config/redis.conf:/redis.conf
-      - ./redis-data:/var/lib/redis
+      - ./redis-data:/data
     healthcheck:
       test: "redis-cli -h ${REDIS_IP} -p 6379 -a ${REDIS_PASSWORD} ping"
       interval: 1s
@@ -50,7 +47,7 @@ services:
     container_name: exam_prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
+      - ./prometheus-data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
