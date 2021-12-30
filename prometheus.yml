@@ -27,5 +27,5 @@ scrape_configs:
     static_configs:
     - targets:
       - app:5001
-remote_read:
-  - url: "http://adapter:9201/read"
+# remote_read:
+#   - url: "http://adapter:9201/read"
